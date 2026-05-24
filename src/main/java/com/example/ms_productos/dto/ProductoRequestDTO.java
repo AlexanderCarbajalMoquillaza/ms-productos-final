@@ -17,6 +17,9 @@ public class ProductoRequestDTO {
 
     private String descripcion;
 
+    @NotBlank(message = "La imagen del producto no puede estar vacío")
+    private String imagenUrl;
+
     @NotNull(message = "El precio es obligatorio")
     @Min(value = 0, message = "El precio debe ser mayor o igual a 0")
     private BigDecimal precio;
