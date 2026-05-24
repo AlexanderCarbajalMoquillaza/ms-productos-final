@@ -36,6 +36,7 @@ public class ProductoServiceImpl implements ProductoService {
         Producto producto = new Producto();
         producto.setNombre(request.getNombre());
         producto.setDescripcion(request.getDescripcion());
+        producto.setImagenUrl(request.getImagenUrl());
         producto.setPrecio(request.getPrecio());
         producto.setStock(request.getStock());
         producto.setEstado(request.getEstado() != null ? request.getEstado() : true);
@@ -51,6 +52,7 @@ public class ProductoServiceImpl implements ProductoService {
         
         producto.setNombre(request.getNombre());
         producto.setDescripcion(request.getDescripcion());
+        producto.setImagenUrl(request.getImagenUrl());
         producto.setPrecio(request.getPrecio());
         producto.setStock(request.getStock());
         if (request.getEstado() != null) {
@@ -74,6 +76,7 @@ public class ProductoServiceImpl implements ProductoService {
         dto.setId(producto.getId());
         dto.setNombre(producto.getNombre());
         dto.setDescripcion(producto.getDescripcion());
+        dto.setImagenUrl(producto.getImagenUrl());
         dto.setPrecio(producto.getPrecio());
         dto.setStock(producto.getStock());
         dto.setEstado(producto.getEstado());

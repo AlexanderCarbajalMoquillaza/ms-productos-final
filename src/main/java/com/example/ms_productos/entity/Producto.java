@@ -25,7 +25,7 @@ public class Producto {
     @Column(length = 500)
     private String descripcion;
 
-    @Column(nullable = false)
+    @Column
     private String imagenUrl;
 
     @Column(nullable = false)
