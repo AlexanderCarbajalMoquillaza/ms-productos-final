@@ -11,4 +11,6 @@ public interface ProductoService {
     ProductoResponseDTO guardar(ProductoRequestDTO productoRequestDTO);
     ProductoResponseDTO actualizar(Long id, ProductoRequestDTO productoRequestDTO);
     void eliminar(Long id);
+    ProductoResponseDTO descontarStock(Long id, Integer cantidad);
+    ProductoResponseDTO aumentarStock(Long id, Integer cantidad);
 }

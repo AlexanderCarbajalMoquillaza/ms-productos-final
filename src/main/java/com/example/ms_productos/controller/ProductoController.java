@@ -2,6 +2,7 @@ package com.example.ms_productos.controller;
 
 import com.example.ms_productos.dto.ProductoRequestDTO;
 import com.example.ms_productos.dto.ProductoResponseDTO;
+import com.example.ms_productos.dto.StockAjusteDTO;
 import com.example.ms_productos.service.ProductoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -46,5 +47,19 @@ public class ProductoController {
     public ResponseEntity<Void> eliminarProducto(@PathVariable Long id) {
         productoService.eliminar(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}/stock/descontar")
+    public ResponseEntity<ProductoResponseDTO> descontarStock(
+            @PathVariable Long id,
+            @Valid @RequestBody StockAjusteDTO stockAjusteDTO) {
+        return ResponseEntity.ok(productoService.descontarStock(id, stockAjusteDTO.getCantidad()));
+    }
+
+    @PatchMapping("/{id}/stock/aumentar")
+    public ResponseEntity<ProductoResponseDTO> aumentarStock(
+            @PathVariable Long id,
+            @Valid @RequestBody StockAjusteDTO stockAjusteDTO) {
+        return ResponseEntity.ok(productoService.aumentarStock(id, stockAjusteDTO.getCantidad()));
     }
 }

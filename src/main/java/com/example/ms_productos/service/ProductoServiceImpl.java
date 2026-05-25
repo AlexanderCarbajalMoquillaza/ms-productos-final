@@ -71,6 +71,31 @@ public class ProductoServiceImpl implements ProductoService {
         productoRepository.save(producto);
     }
 
+    @Override
+    public ProductoResponseDTO descontarStock(Long id, Integer cantidad) {
+        Producto producto = productoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con el id: " + id));
+        if (Boolean.FALSE.equals(producto.getEstado())) {
+            throw new IllegalArgumentException("El producto no está activo.");
+        }
+        if (producto.getStock() < cantidad) {
+            throw new IllegalArgumentException(
+                    "Stock insuficiente. Disponible: " + producto.getStock() + ", solicitado: " + cantidad);
+        }
+        producto.setStock(producto.getStock() - cantidad);
+        productoRepository.save(producto);
+        return mapToDTO(producto);
+    }
+
+    @Override
+    public ProductoResponseDTO aumentarStock(Long id, Integer cantidad) {
+        Producto producto = productoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con el id: " + id));
+        producto.setStock(producto.getStock() + cantidad);
+        productoRepository.save(producto);
+        return mapToDTO(producto);
+    }
+
     private ProductoResponseDTO mapToDTO(Producto producto) {
         ProductoResponseDTO dto = new ProductoResponseDTO();
         dto.setId(producto.getId());
